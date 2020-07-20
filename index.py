@@ -10,17 +10,16 @@ import os
 
 ui, _ = loadUiType('main.ui')
 
-
 class MainApp(QMainWindow, ui):
     def __init__(self, parent=None):
         super(MainApp, self).__init__(parent)
         QMainWindow.__init__(self)
         self.setupUi(self)
-        self.initUi();
+        self.initUi()
         self.connectButtons()
 
     def initUi(self):
-        pass
+        self.tabWidget.tabBar().setVisible(False)
 
     def connectButtons(self):
         self.btnDownload.clicked.connect(self.startDownload)
@@ -30,9 +29,17 @@ class MainApp(QMainWindow, ui):
         self.btnOneVdoDownload.clicked.connect(self.downloadSingleYoutubeVideo)
         self.btnPlaylistDownload.clicked.connect(self.downloadPlaylist)
         self.btnPlaylistSaveBrowse.clicked.connect(self.playlistBrowse)
+        self.btnHome.clicked.connect(self.homeTab)
+        self.btnDownload2.clicked.connect(self.downloadTab)
+        self.btnSettings.clicked.connect(self.settingsTab)
+        self.btnYoutube.clicked.connect(self.youtubeTab)
+        self.btnDarkGray.clicked.connect(self.applyDarkGray)
+        self.btnDarkBlue.clicked.connect(self.applyDarkBlue)
+        self.btnClassic.clicked.connect(self.applyClassic)
+
 
     def handleProgress(self, noOfBlocks, blockSize, totalSize):
-        """ Calculate download progress"""
+        """ Calculate download progress """
         totalDataRead = noOfBlocks * blockSize
         if totalSize > 0:
             percentDownloaded = int(totalDataRead * 100 / totalSize)
@@ -157,6 +164,32 @@ class MainApp(QMainWindow, ui):
         saveLocation = QFileDialog.getExistingDirectory(self, 'Select download directory')
         self.lnEdtSvPlaylistTb2.setText(saveLocation)
 
+    def homeTab(self):
+        self.tabWidget.setCurrentIndex(0)
+
+    def settingsTab(self):
+        self.tabWidget.setCurrentIndex(3)
+
+    def youtubeTab(self):
+        self.tabWidget.setCurrentIndex(2)
+
+    def downloadTab(self):
+        self.tabWidget.setCurrentIndex(1)
+
+    def applyDarkGray(self):
+        style = open('themes/qdarkgraystyle.css', 'r')
+        style = style.read()
+        self.setStyleSheet(style)
+
+    def applyDarkBlue(self):
+        style = open('themes/qdarkbluestyle.css', 'r')
+        style = style.read()
+        self.setStyleSheet(style)
+
+    def applyClassic(self):
+        self.setStyleSheet('')
+
+
 
 
 
@@ -170,47 +203,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-# {'playlist_id': 'PLZoTAELRMXVNxYFq_9MuiUdn2YnlFqmMK', 'likes': None, 'title': 'Pytorch', 'author': 'Krish Naik',
-#  'dislikes': None, 'description': '',
-#  'items': [{'pafy': Pafy object: U0i7 - c3Vrgc[Pytorch Tutorial 1 - Pytorch Installation For D..],
-#  'playlist_meta': {'added': '12/07/2020', 'is_cc': False, 'is_hd': True, 'likes': 271,
-#                    'title': 'Pytorch Tutorial 1-Pytorch Installation For Deep Learning', 'views': '5,256',
-#                    'rating': 4.0, 'author': 'Krish Naik', 'user_id': 'NU_lfiiWBdtULKOw6X0Dig', 'privacy': 'public',
-#                    'start': 0.0, 'dislikes': 2, 'duration': '15:02', 'comments': '42',
-#                    'keywords': '"pytorch tutorial pdf" "pytorch tutorial for beginners" "pytorch examples" "tensorflow tutorial" "pytorch computer vision tutorial" "deep learning with pytorch" "pytorch documentation" "pytorch projects for beginners"',
-#                    'thumbnail': 'https://i.ytimg.com/vi/U0i7-c3Vrgc/default.jpg', 'cc_license': False,
-#                    'category_id': 27,
-#                    'description': "PyTorch is an open source machine learning library based on the Torch library,used for applications such as computer vision and natural language processing,primarily developed by Facebook's AI Research lab (FAIR).It is free and open-source software released under the Modified BSD license. Although the Python interface is more polished and the primary focus of development, PyTorch also has a C++ interface.\n\nA number of pieces of Deep Learning software are built on top of PyTorch, including Tesla, Uber's Pyro, HuggingFace's Transformers, PyTorch Lightning, and Catalyst.\n\nPyTorch provides two high-level features:\n\nTensor computing (like NumPy) with strong acceleration via graphics processing units (GPU)\nDeep neural networks built on a tape-based automatic differentiation system\ngithub: https://github.com/krishnaik06/Pytorch-Tutorial",
-#                    'encrypted_id': 'U0i7-c3Vrgc', 'time_created': 1594559943, 'time_updated': None,
-#                    'length_seconds': 902, 'end': 902}}, {'pafy': Pafy object: 3XA4ojhq44Q[Pytorch Tutorial
-#                                                          2 - Understanding Of Tensors U..], 'playlist_meta': {
-#     'added': '14/07/2020', 'is_cc': False, 'is_hd': True, 'likes': 127,
-#     'title': 'Pytorch Tutorial 2-Understanding Of Tensors Using Pytorch', 'views': '2,572', 'rating': 4.0,
-#     'author': 'Krish Naik', 'user_id': 'NU_lfiiWBdtULKOw6X0Dig', 'privacy': 'public', 'start': 0.0, 'dislikes': 3,
-#     'duration': '16:17', 'comments': '24',
-#     'keywords': '"pytorch tutorial pdf" "pytorch tutorial for beginners" "pytorch examples" "tensorflow tutorial" "pytorch computer vision tutorial" "deep learning with pytorch" "pytorch documentation" "pytorch projects for beginners"',
-#     'thumbnail': 'https://i.ytimg.com/vi/3XA4ojhq44Q/default.jpg', 'cc_license': False, 'category_id': 27,
-#     'description': "PyTorch is an open source machine learning library based on the Torch library,used for applications such as computer vision and natural language processing,primarily developed by Facebook's AI Research lab (FAIR).It is free and open-source software released under the Modified BSD license. Although the Python interface is more polished and the primary focus of development, PyTorch also has a C++ interface.\ngithub: https://github.com/krishnaik06/Pytorch-Tutorial\nPytorch Playlist: https://www.youtube.com/playlist?list=PLZoTAELRMXVNxYFq_9MuiUdn2YnlFqmMK\ngithub: https://github.com/krishnaik06/Pytorch-Tutorial\n\nDL Playlist: https://www.youtube.com/watch?v=DKSZHN7jftI&list=PLZoTAELRMXVPGU70ZGsckrMdr0FteeRUi\n\nA number of pieces of Deep Learning software are built on top of PyTorch, including Tesla, Uber's Pyro, HuggingFace's Transformers, PyTorch Lightning, and Catalyst.\n\nPyTorch provides two high-level features:\n\nTensor computing (like NumPy) with strong acceleration via graphics processing units (GPU)\nDeep neural networks built on a tape-based automatic differentiation system\ngithub: https://github.com/krishnaik06/Pytorch-Tutorial",
-#     'encrypted_id': '3XA4ojhq44Q', 'time_created': 1594717241, 'time_updated': None, 'length_seconds': 977,
-#     'end': 977}}, {'pafy': Pafy object: igypbt686zI[Pytorch TutoriaL 3 - How To Perform
-#                    BackPropoga..], 'playlist_meta': {'added': '17/07/2020', 'is_cc': False, 'is_hd': True, 'likes': 52,
-#                                                      'title': 'Pytorch TutoriaL 3-How To Perform BackPropogation Using Pytorch',
-#                                                      'views': '1,065', 'rating': 4.0, 'author': 'Krish Naik',
-#                                                      'user_id': 'NU_lfiiWBdtULKOw6X0Dig', 'privacy': 'public',
-#                                                      'start': 0.0, 'dislikes': 1, 'duration': '15:51', 'comments': '13',
-#                                                      'keywords': '"pytorch tutorial pdf" "pytorch tutorial for beginners" "pytorch examples" "tensorflow tutorial" "pytorch computer vision tutorial" "deep learning with pytorch" "pytorch documentation" "pytorch projects for beginners"',
-#                                                      'thumbnail': 'https://i.ytimg.com/vi/igypbt686zI/default.jpg',
-#                                                      'cc_license': False, 'category_id': 27,
-#                                                      'description': "Reuploaded in HD format\nPyTorch is an open source machine learning library based on the Torch library,used for applications such as computer vision and natural language processing,primarily developed by Facebook's AI Research lab (FAIR).It is free and open-source software released under the Modified BSD license. Although the Python interface is more polished and the primary focus of development, PyTorch also has a C++ interface.\nPytorch Playlist: https://www.youtube.com/playlist?list=PLZoTAELRMXVNxYFq_9MuiUdn2YnlFqmMK\ngithub: https://github.com/krishnaik06/Pytorch-Tutorial\n\nA number of pieces of Deep Learning software are built on top of PyTorch, including Tesla, Uber's Pyro, HuggingFace's Transformers, PyTorch Lightning, and Catalyst.\n\nPyTorch provides two high-level features:\n\nTensor computing (like NumPy) with strong acceleration via graphics processing units (GPU)\nDeep neural networks built on a tape-based automatic differentiation system\ngithub: https://github.com/krishnaik06/Pytorch-Tutorial",
-#                                                      'encrypted_id': 'igypbt686zI', 'time_created': 1594971699,
-#                                                      'time_updated': None, 'length_seconds': 951, 'end': 951}}, {
-#     'pafy': Pafy object: oSHwZG4X3Zo[Tutorial 4 - Solving Kaggle Pima Diabetes Pred..], 'playlist_meta': {
-#     'added': '19/07/2020', 'is_cc': False, 'is_hd': True, 'likes': 16,
-#     'title': 'Tutorial 4- Solving Kaggle Pima Diabetes Prediction Using ANN With PyTorch Library', 'views': '1',
-#     'rating': 5.0, 'author': 'Krish Naik', 'user_id': 'NU_lfiiWBdtULKOw6X0Dig', 'privacy': 'public', 'start': 0.0,
-#     'dislikes': 0, 'duration': '40:58', 'comments': '1',
-#     'keywords': '"pytorch tutorial pdf" "pytorch tutorial for beginners" "pytorch examples" "tensorflow tutorial" "pytorch computer vision tutorial" "deep learning with pytorch" "pytorch documentation" "pytorch projects for beginners"',
-#     'thumbnail': 'https://i.ytimg.com/vi/oSHwZG4X3Zo/default.jpg', 'cc_license': False, 'category_id': 27,
-#     'description': "PyTorch is an open source machine learning library based on the Torch library,used for applications such as computer vision and natural language processing,primarily developed by Facebook's AI Research lab (FAIR).It is free and open-source software released under the Modified BSD license. Although the Python interface is more polished and the primary focus of development, PyTorch also has a C++ interface.\ngithub: https://github.com/krishnaik06/Pytorch-Tutorial\nPytorch Playlist: https://www.youtube.com/playlist?list=PLZoTAELRMXVNxYFq_9MuiUdn2YnlFqmMK\n\n\nA number of pieces of Deep Learning software are built on top of PyTorch, including Tesla, Uber's Pyro, HuggingFace's Transformers, PyTorch Lightning, and Catalyst.\n\nPyTorch provides two high-level features:\n\nTensor computing (like NumPy) with strong acceleration via graphics processing units (GPU)\nDeep neural networks built on a tape-based automatic differentiation system\ngithub: https://github.com/krishnaik06/Pytorch-Tutorial",
-#     'encrypted_id': 'oSHwZG4X3Zo', 'time_created': 1594972553, 'time_updated': None, 'length_seconds': 2458,
-#     'end': 2458}}]}
