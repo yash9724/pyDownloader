@@ -1,0 +1,9 @@
+certifi==2020.6.20
+click==7.1.2
+pafy==0.5.5
+PyQt5==5.15.0
+PyQt5-sip==12.8.0
+pyqt5-tools==5.15.0.1.7
+python-dotenv==0.14.0
+upgrade-ensurepip==0.2.1
+youtube-dl==2020.6.16.1
