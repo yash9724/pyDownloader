@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>720</width>
-    <height>414</height>
+    <height>415</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_5">
      <attribute name="title">
@@ -101,7 +101,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="groupBox_4">
+     <widget class="QGroupBox" name="groupBox_1">
       <property name="geometry">
        <rect>
         <x>319</x>
@@ -155,7 +155,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="groupBox_3">
+     <widget class="QGroupBox" name="groupBox_2">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -209,7 +209,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="groupBox_5">
+     <widget class="QGroupBox" name="groupBox_3">
       <property name="geometry">
        <rect>
         <x>320</x>
@@ -366,7 +366,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideNone</enum>
@@ -847,7 +847,7 @@
     </property>
     <property name="icon">
      <iconset resource="photo.qrc">
-      <normaloff>:/icons/download.png</normaloff>:/icons/download.png</iconset>
+      <normaloff>:/icons/home_download.png</normaloff>:/icons/home_download.png</iconset>
     </property>
     <property name="iconSize">
      <size>

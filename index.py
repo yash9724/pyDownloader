@@ -1,7 +1,8 @@
 import sys
 import urllib.request
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QApplication,QMainWindow, QFileDialog, QMessageBox
+from PyQt5.QtCore import QRect, QPropertyAnimation
 from PyQt5.uic import loadUiType
 
 import pafy
@@ -15,11 +16,13 @@ class MainApp(QMainWindow, ui):
         super(MainApp, self).__init__(parent)
         QMainWindow.__init__(self)
         self.setupUi(self)
+        self.setFixedSize(self.geometry().width(), self.geometry().height())
         self.initUi()
         self.connectButtons()
 
     def initUi(self):
         self.tabWidget.tabBar().setVisible(False)
+        self.animateBoxes()
 
     def connectButtons(self):
         self.btnDownload.clicked.connect(self.startDownload)
@@ -191,7 +194,34 @@ class MainApp(QMainWindow, ui):
 
 
 
+    def animateBoxes(self):
+        boxAnimation1 = QPropertyAnimation(self.groupBox, b"geometry")
+        boxAnimation1.setDuration(1000)
+        boxAnimation1.setStartValue(QRect(0,0,0,0))
+        boxAnimation1.setEndValue(QRect(29, 40, 261, 111))
+        boxAnimation1.start()
+        self.boxAnimation1 = boxAnimation1
 
+        boxAnimation2 = QPropertyAnimation(self.groupBox_1, b"geometry")
+        boxAnimation2.setDuration(1000)
+        boxAnimation2.setStartValue(QRect(0, 0, 0, 0))
+        boxAnimation2.setEndValue(QRect(319, 40, 261, 111))
+        boxAnimation2.start()
+        self.boxAnimation2 = boxAnimation2
+
+        boxAnimation3 = QPropertyAnimation(self.groupBox_2, b"geometry")
+        boxAnimation3.setDuration(1000)
+        boxAnimation3.setStartValue(QRect(0, 0, 0, 0))
+        boxAnimation3.setEndValue(QRect(30, 180, 261, 111))
+        boxAnimation3.start()
+        self.boxAnimation3 = boxAnimation3
+
+        boxAnimation4 = QPropertyAnimation(self.groupBox_3, b"geometry")
+        boxAnimation4.setDuration(1000)
+        boxAnimation4.setStartValue(QRect(0, 0, 0, 0))
+        boxAnimation4.setEndValue(QRect(320, 180, 261, 111))
+        boxAnimation4.start()
+        self.boxAnimation4 = boxAnimation4
 
 def main():
     app = QApplication(sys.argv)
